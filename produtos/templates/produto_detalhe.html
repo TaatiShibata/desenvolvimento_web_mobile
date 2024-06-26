@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Detalhes do Produto
+{% endblock %}
+
+{% block content %}
+<style>
+    .product-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .product-image {
+        max-width: 400px;
+        margin-bottom: 20px;
+    }
+    .product-info {
+        text-align: center;
+    }
+    .product-reviews {
+        margin-top: 40px;
+    }
+    .review-form {
+        margin-top: 20px;
+    }
+    .review-form textarea {
+        width: 100%;
+        height: 100px;
+        resize: none;
+    }
+    .review-item {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .review-item p {
+        margin: 0;
+    }
+    .btn-submit {
+        background-color: #008B8B;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn-submit:hover {
+        background-color: #005f5f;
+        transform: scale(1.05);
+    }
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+    .btn-delete:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="product-details">
+        <div class="product-image">
+            {% if produto.imagem %}
+            <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+            {% else %}
+            <p>Imagem não disponível</p>
+            {% endif %}
+        </div>
+        <div class="product-info">
+            <h1>{{ produto.nome }}</h1>
+            <p>{{ produto.descricao }}</p>
+            <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+        </div>
+    </div>
+
+    <div class="product-reviews">
+        <h2>Avaliações</h2>
+        {% for avaliacao in avaliacoes %}
+        <div class="review-item">
+            <p><strong>{{ avaliacao.usuario.username }}</strong> - {{ avaliacao.data }}</p>
+            <p>Nota: {{ avaliacao.nota }}</p>
+            <p>{{ avaliacao.comentario }}</p>
+            {% if avaliacao.usuario == user %}
+            <form method="post" action="{% url 'apagar_avaliacao' avaliacao.id %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-delete">Apagar Avaliação</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="review-form">
+        <h2>Deixe sua Avaliação</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-submit">Enviar Avaliação</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -69,11 +69,6 @@ project_name/settings/test.py
 # Arquivos de ambiente
 .env
 
-# Arquivos de configuração Docker
-**/docker-compose.override.yml
-Dockerfile
-docker-compose.yml
-
 # Arquivos de cobertura de teste
 htmlcov/
 .coverage

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar - Meu Site</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        /* Estilos globais para o site */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Estilos para grupos de formulário */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"], 
+        .form-group input[type="email"], 
+        .form-group input[type="password"] {
+            width: calc(100% - 22px); /* Ajuste para compensar a largura da borda */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilos para botões */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #008B8B;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px; /* Espaçamento superior entre botões */
+        }
+
+        .btn:hover {
+            background-color: #005f5f;
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #008B8B;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #008B8B;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #008B8B;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Estilos para a barra de navegação */
+        nav {
+            background-color: #008B8B;
+            color: #fff;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #f8f9fa; /* Cor do link ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Registrar</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Registrar Novo Usuário</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Nome de Usuário:</label>
+                <input type="text" id="id_username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="id_email">E-mail:</label>
+                <input type="email" id="id_email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Senha:</label>
+                <input type="password" id="id_password1" name="password1" required>
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirmar Senha:</label>
+                <input type="password" id="id_password2" name="password2" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Registrar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <a href="{% url 'index' %}" class="btn back-link">Voltar para a página inicial</a>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

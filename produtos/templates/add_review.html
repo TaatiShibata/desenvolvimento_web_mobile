@@ -1,0 +1,28 @@
+<!-- produtos/templates/produtos/product_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhe do Produto</title>
+</head>
+<body>
+    <h1>{{ produto.nome }}</h1>
+    <p>{{ produto.descricao }}</p>
+    <p>Preço: {{ produto.preco }}</p>
+
+    <h2>Avaliações</h2>
+    <ul>
+        {% for avaliacao in avaliacoes %}
+            <li>{{ avaliacao.usuario }}: {{ avaliacao.nota }} - {{ avaliacao.comentario }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Adicionar Avaliação</h2>
+    <form action="{% url 'add_review' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar Avaliação</button>
+    </form>
+</body>
+</html>

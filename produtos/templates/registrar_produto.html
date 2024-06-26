@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Produto - Meu Site</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        /* Estilos globais para o site */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Estilos para grupos de formulário */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"], 
+        .form-group input[type="number"],
+        .form-group textarea,
+        .form-group input[type="file"] {
+            width: calc(100% - 22px); /* Ajuste para compensar a largura da borda */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        /* Estilos específicos para o botão */
+        .btn-registrar {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #008B8B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-registrar:hover {
+            background-color: #005f5f;
+        }
+
+        .form-group .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        /* Estilos para o link de voltar */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #008B8B;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #008B8B;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #008B8B;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Estilos para a barra de navegação */
+        nav {
+            background-color: #008B8B;
+            color: #fff;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #f8f9fa; /* Cor do link ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' %}">Perfil</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'registrar_produto' %}">Registrar Produto</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Registrar Produto</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_nome">Nome do Produto:</label>
+                <input type="text" id="id_nome" name="nome" class="form-control" required>
+                {% if form.nome.errors %}
+                    <p class="error-message">{{ form.nome.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_descricao">Descrição do Produto:</label>
+                <textarea id="id_descricao" name="descricao" rows="8" class="form-control" required></textarea>
+                {% if form.descricao.errors %}
+                    <p class="error-message">{{ form.descricao.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_preco">Preço do Produto:</label>
+                <input type="number" id="id_preco" name="preco" step="0.01" class="form-control" required>
+                {% if form.preco.errors %}
+                    <p class="error-message">{{ form.preco.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_imagem">Imagem do Produto:</label>
+                <input type="file" id="id_imagem" name="imagem" class="form-control-file" accept="image/*">
+                {% if form.imagem.errors %}
+                    <p class="error-message">{{ form.imagem.errors }}</p>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn-registrar">Registrar Produto</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <a href="{% url 'index' %}" class="back-link">Voltar para a página inicial</a>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

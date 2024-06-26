@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Página Inicial
+{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        max-width: 1200px;
+        margin: auto;
+    }
+    .card {
+        margin: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .btn-details {
+        background-color: #008B8B;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn-details:hover {
+        background-color: #005f5f;
+        transform: scale(1.05);
+    }
+    .card-body {
+        padding: 15px;
+    }
+    .card-title {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    .card-text {
+        font-size: 0.9em;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container mt-5">
+    <h1>Produtos em Destaque</h1>
+    <div class="row">
+        {% for produto in produtos %}
+        <div class="col-md-3 col-sm-6 mb-4"> <!-- col-sm-6 para exibir 2 produtos por linha em telas pequenas -->
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produto.nome }}</h5>
+                    <p class="card-text">{{ produto.descricao|truncatewords:20 }}</p>
+                    <p class="card-text"><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+                    <a href="{% url 'produto_detalhe' produto.id %}" class="btn btn-details">Ver Detalhes</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
