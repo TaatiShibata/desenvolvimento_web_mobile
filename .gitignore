@@ -1,0 +1,104 @@
+# Arquivos Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Diretórios de ambientes virtuais
+venv/
+env/
+.venv/
+.env/
+ENV/
+.ENV/
+
+# Dependências instaladas
+*.egg-info/
+*.egg
+*.whl
+dist/
+build/
+.eggs/
+
+# Configurações de IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Arquivos de banco de dados SQLite (se você estiver usando)
+*.sqlite3
+db.sqlite3
+
+# Arquivos de cache
+*.log
+*.pot
+*.pyc
+*.pyo
+*.out
+*.cover
+*.orig
+*.py,cover
+*.seed
+*.log
+*.tmp
+
+# Arquivos e pastas Django específicos
+/static/
+media/
+*~
+*.orig
+*.pyc
+.DS_Store
+*.pyo
+*.~#
+*.py[co]
+*.pyd
+*.pyo
+*.pdb
+*.tgz
+*.egg
+*.old
+
+# Diretório do Django (se você estiver usando uma estrutura de diretórios diferente)
+project_name/settings/local.py
+project_name/settings/local_settings.py
+project_name/settings/dev.py
+project_name/settings/prod.py
+project_name/settings/test.py
+
+# Arquivos de ambiente
+.env
+
+# Arquivos de configuração Docker
+**/docker-compose.override.yml
+Dockerfile
+docker-compose.yml
+
+# Arquivos de cobertura de teste
+htmlcov/
+.coverage
+.tox/
+.nox/
+
+# Arquivos do sistema operacional
+Thumbs.db
+.DS_Store
+
+# Arquivos de compilação C
+*.o
+*.a
+*.dylib
+*.lib
+*.obj
+*.dll
+*.exe
+*.pdb
+
+# Arquivos de documentação
+*.pdf
+*.rst
+*.md
+
+# Artefatos de instalação de pacotes
+pip-log.txt
+pip-delete-this-directory.txt
